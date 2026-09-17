@@ -1,57 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fixmyresume</title>
-<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fixmyresume</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body class="bg-[#252422] text-white font-['Cabin_Sketch',cursive] min-h-screen flex flex-col">
 
-<header class="text-[#EB5E28] p-4">
-<a href="index.html" class="no-underline ">
-<h1 class="text-6xl font-bold text-center">Fixmyresume</h1>
-</a>
-</header>
+  <header class="text-[#EB5E28] p-4 sm:p-6">
+    <a href="index.html" class="no-underline">
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-center">Fixmyresume</h1>
+    </a>
+  </header>
 
-<main class="flex-1 flex items-start justify-center px-4 pt-6 md:pt-10">
+  <main class="flex-1 flex items-center justify-center px-4 py-6 md:py-10">
+    <div class="w-full max-w-2xl border-4 border-[#EB5E28] rounded-2xl p-6 sm:p-8 bg-[#1f1e1b] shadow-xl">
+      <h2 class="text-2xl sm:text-3xl md:text-4xl text-[#EB5E28] text-center mb-2">Upload Your Resume</h2>
+      <p class="text-center text-[#FFFCF2] mb-6 sm:mb-8 text-lg sm:text-xl">We don't just grade it. We fix it.</p>
 
-<div class="w-[min(92vw,48rem)] min-h-[28rem] border-4 border-[#EB5E28] rounded-2xl p-8 bg-[#1f1e1b]">
-<h2 class="text-3xl md:text-4xl text-[#EB5E28] text-center mb-4">Upload Your Resume</h2>
-<p class="text-center text-[#FFFCF2] mb-8 text-xl">We don't just grade it. We fix it.</p>
+      <form id="resumeForm" class="space-y-6 sm:space-y-8">
+        <label
+          id="dropZone"
+          for="resumeFile"
+          class="block w-full sm:w-5/6 mx-auto cursor-pointer rounded-xl border-2 border-dashed border-[#EB5E28] p-8 sm:p-12 text-center hover:bg-[#403D39] transition-colors"
+        >
+          <span id="fileLabel" class="text-lg sm:text-xl text-[#FFFCF2] break-words">
+            Click or drag & drop your resume here (.pdf, .docx, .txt)
+          </span>
+        </label>
+        <input id="resumeFile" name="resumeFile" type="file" accept=".pdf,.doc,.docx,.txt" class="hidden">
 
-<form id="resumeForm" class="space-y-8">
-<label for="resumeFile" class="block w-3/4 mx-auto cursor-pointer rounded-xl border-2 border-dashed border-[#EB5E28] p-[4.25rem] text-center hover:bg-[#403D39] transition-colors">
-<span id="fileLabel" class="text-xl text-[#FFFCF2]">Click here to upload your resume</span>
-</label>
-<input id="resumeFile" name="resumeFile" type="file" accept=".pdf,.doc,.docx" class="hidden" required>
+        <button
+          id="analyzeBtn"
+          type="submit"
+          class="relative block mx-auto w-full sm:w-2/3 md:w-1/2 py-3 px-8 text-[#403D39] text-xl font-black tracking-wide overflow-hidden bg-[#FFFCF2] rounded-2xl transition-all duration-300 ease-in-out shadow-md hover:scale-105 hover:text-[#252422] hover:shadow-lg active:scale-95 before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-[#EB5E28] before:transition-all before:duration-300 before:ease-in-out before:z-[-1] before:rounded-2xl hover:before:left-0 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100 cursor-pointer"
+        >
+          Start Analysis
+        </button>
+      </form>
+    </div>
+  </main>
 
-<button id="analyzeBtn" type="submit" class="relative block mx-auto w-1/2 py-3 px-8 text-[#403D39] text-xl font-black tracking-wide overflow-hidden bg-[#FFFCF2] rounded-2xl transition-all duration-400 ease-in-out shadow-md hover:scale-105 hover:text-[#252422] hover:shadow-lg active:scale-90 before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-[#EB5E28] before:to-[#EB5E28] before:transition-all before:duration-500 before:ease-in-out before:z-[-1] before:rounded-2xl hover:before:left-0 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100 cursor-pointer">
-Start Analysis
-</button>
-</form>
-</div>
+  <section id="processingScreen" class="hidden fixed inset-0 z-50 bg-[#252422] flex-col items-center justify-center px-6 text-center">
+    <div class="flex flex-row gap-2">
+      <div class="w-4 h-4 rounded-full bg-[#EB5E28] animate-bounce"></div>
+      <div class="w-4 h-4 rounded-full bg-[#EB5E28] animate-bounce [animation-delay:-.3s]"></div>
+      <div class="w-4 h-4 rounded-full bg-[#EB5E28] animate-bounce [animation-delay:-.5s]"></div>
+    </div>
 
+    <div class="mt-8 italic text-[#FFFCF2] text-xl md:text-2xl">
+      <p id="processingText" class="opacity-100 transition-opacity duration-500">Your resume sucks. We'll fix it.</p>
+    </div>
+  </section>
 
-</main>
-
-<section id="processingScreen" class="hidden fixed inset-0 z-50 bg-[#252422] flex-col items-center justify-center px-6 text-center">
-<div class="flex flex-row gap-2">
-<div class="w-4 h-4 rounded-full bg-[#EB5E28] animate-bounce"></div>
-<div class="w-4 h-4 rounded-full bg-[#EB5E28] animate-bounce [animation-delay:-.3s]"></div>
-<div class="w-4 h-4 rounded-full bg-[#EB5E28] animate-bounce [animation-delay:-.5s]"></div>
-</div>
-
-<div class="mt-8 italic text-[#FFFCF2] text-xl md:text-2xl">
-<p id="processingText" class="opacity-100 transition-opacity duration-500">Your resume sucks. We'll fix it.</p>
-</div>
-</section>
-
-
-
-<script src="index.js"></script>
+  <script src="index.js"></script>
 </body>
 </html>
